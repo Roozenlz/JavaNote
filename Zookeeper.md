@@ -1,3 +1,16 @@
+---
+title: Zookeeper
+categories:
+  - 笔记
+tags:
+  - Java
+  - 后端
+  - 笔记
+halo:
+  site: https://roozen.top
+  name: c2a9d1b2-f4cd-488a-aa47-ade556833b5f
+  publish: true
+---
 # Zookeeper
 
 ## 基本介绍

@@ -1,3 +1,16 @@
+---
+title: JVM
+categories:
+  - 笔记
+tags:
+  - Java
+  - 后端
+  - 笔记
+halo:
+  site: https://roozen.top
+  name: 398d485f-1fdd-447f-82e6-3b2e331f2093
+  publish: true
+---
 # JVM
 
 ## JVM概述

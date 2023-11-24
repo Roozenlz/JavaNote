@@ -1,3 +1,16 @@
+---
+title: Netty
+categories:
+  - 笔记
+tags:
+  - Java
+  - 后端
+  - 笔记
+halo:
+  site: https://roozen.top
+  name: 70f15314-8121-48a4-ae37-8a09285a9791
+  publish: true
+---
 # Netty
 
 ## 基本介绍

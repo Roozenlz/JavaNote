@@ -1,3 +1,16 @@
+---
+title: JUC
+categories:
+  - 笔记
+tags:
+  - Java
+  - 后端
+  - 笔记
+halo:
+  site: https://roozen.top
+  name: c6f7c5d8-0483-442b-a67c-561e075a257b
+  publish: true
+---
 # JUC
 
 ## 进程
