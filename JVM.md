@@ -28,14 +28,14 @@ Java 代码执行流程：`Java 程序 --（编译）--> 字节码文件 --（�
 
 JVM 结构：
 
-<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-概述图.png" style="zoom: 80%;" />
+<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-概述图.png" style="zoom: 200%;" />
 
 JVM、JRE、JDK 对比：
 
 * JDK(Java Development Kit)：Java 标准开发包，提供了编译、运行 Java 程序所需的各种工具和资源
 * JRE( Java Runtime Environment)：Java 运行环境，用于解释执行 Java 的字节码文件
 
-<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-JRE关系.png" style="zoom: 80%;" />
+<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-JRE关系.png" style="zoom: 200%;" />
 
 
 
@@ -153,11 +153,11 @@ Java 虚拟机栈：Java Virtual Machine Stacks，**每个线程**运行时所�
 * 每个栈由多个栈帧（Frame）组成，对应着每次方法调用时所占用的内存，每个栈帧中存储着：
 
   * 局部变量表：存储方法里的 Java 基本数据类型以及对象的引用
-  * 动态链接：也叫指向运行时常量池的方法引用
+  * [动态链接](https://blog.51cto.com/u_16213690/7062641)：也叫指向运行时常量池的方法引用
   * 方法返回地址：方法正常退出或者异常退出的定义
   * 操作数栈或表达式栈和其他一些附加信息
   
-  <img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-虚拟机栈.png" style="zoom:50%;" />
+  <img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JVM-虚拟机栈.png" style="zoom:200%;" />
 
 设置栈内存大小：`-Xss size`   `-Xss 1024k`
 
@@ -167,7 +167,7 @@ Java 虚拟机栈：Java Virtual Machine Stacks，**每个线程**运行时所�
 
 * 栈内存**不需要进行GC**，方法开始执行的时候会进栈，方法调用后自动弹栈，相当于清空了数据
 
-* 栈内存分配越大越大，可用的线程数越少（内存越大，每个线程拥有的内存越大）
+* 栈内存分配越大，可用的线程数越少（栈内存分配越大，每个线程占用的内存越大，内存总量一定，可用线程数越少）
 
 * 方法内的局部变量是否**线程安全**：
   * 如果方法内局部变量没有逃离方法的作用访问，它是线程安全的（逃逸分析）
@@ -176,7 +176,7 @@ Java 虚拟机栈：Java Virtual Machine Stacks，**每个线程**运行时所�
 异常：
 
 * 栈帧过多导致栈内存溢出 （超过了栈的容量），会抛出 OutOfMemoryError 异常
-* 当线程请求的栈深度超过最大值，会抛出 StackOverflowError 异常
+* 当线程请求的栈深度超过最大值，会抛出 StackOverFlowError 异常
 
 
 
@@ -184,7 +184,7 @@ Java 虚拟机栈：Java Virtual Machine Stacks，**每个线程**运行时所�
 
 
 
-##### 局部变量
+##### 局部变量表
 
 局部变量表也被称之为局部变量数组或本地变量表，本质上定义为一个数字数组，主要用于存储方法参数和定义在方法体内的局部变量
 
@@ -258,7 +258,7 @@ Return Address：存放调用该方法的 PC 寄存器的值
 
 正常完成出口：执行引擎遇到任意一个方法返回的字节码指令（return），会有返回值传递给上层的方法调用者
 
-异常完成出口：方法执行的过程中遇到了异常（Exception），并且这个异常没有在方法内进行处理，本方法的异常表中没有搜素到匹配的异常处理器，导致方法退出
+异常完成出口：方法执行的过程中遇到了异常（Exception），并且这个异常没有在方法内进行处理，本方法的异常表中没有搜索到匹配的异常处理器，导致方法退出
 
 两者区别：通过异常完成出口退出的不会给上层调用者产生任何的返回值
 
@@ -276,11 +276,11 @@ Return Address：存放调用该方法的 PC 寄存器的值
 
 #### 本地方法栈
 
-本地方法栈是为虚拟机执行本地方法时提供服务的
+本地方法栈是为虚拟机执行**本地方法**时提供服务的
 
 JNI：Java Native Interface，通过使用 Java 本地接口程序，可以确保代码在不同的平台上方便移植
 
-* 不需要进行 GC，与虚拟机栈类似，也是线程私有的，有 StackOverFlowError 和 OutOfMemoryError 异常
+* 不需要进行 GC，与虚拟机栈类似，也是**线程私有**的，有 StackOverFlowError 和 OutOfMemoryError 异常
 * 虚拟机栈执行的是 Java 方法，在 HotSpot JVM 中，直接将本地方法栈和虚拟机栈合二为一
 * 本地方法一般是由其他语言编写，并且被编译为基于本机硬件和操作系统的程序
 * 当某个线程调用一个本地方法时，就进入了不再受虚拟机限制的世界，和虚拟机拥有同样的权限
@@ -315,12 +315,12 @@ Program Counter Register 程序计数器（寄存器）
 
 原理：
 
-* JVM 对于多线程是通过线程轮流切换并且分配线程执行时间，一个处理器只会处理执行一个线程
+* JVM 的多线程是通过线程轮流切换并且分配线程执行时间，一个处理器只会处理执行一个线程
 * 切换线程需要从程序计数器中来回去到当前的线程上一次执行的行号
 
 特点：
 
-* 是线程私有的
+* 是**线程私有**的
 * **不会存在内存溢出**，是 JVM 规范中唯一一个不出现 OOM 的区域，所以这个空间不会进行 GC
 
 Java 反编译指令：`javap -v Test.class`
@@ -346,7 +346,7 @@ Java 反编译指令：`javap -v Test.class`
 
 #### 堆
 
-Heap 堆：是 JVM 内存中最大的一块，由所有线程共享，由垃圾回收器管理的主要区域，堆中对象大部分都需要考虑线程安全的问题
+Heap 堆：是 JVM 内存中最大的一块，由所有**线程共享**，由垃圾回收器管理的主要区域，堆中对象大部分都需要考虑线程安全的问题
 
 存放哪些资源：
 
